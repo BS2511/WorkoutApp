@@ -1,0 +1,47 @@
+﻿@model MVCDemo.d_login_data
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@{
+    Layout = null;
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Login DEmo</legend>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.d_login_desc_st)</td>
+                <td>@Html.TextBoxFor(a => a.d_login_desc_st)</td>
+                <td>@Html.ValidationMessageFor(a => a.d_login_desc_st)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(a => a.d_pass_desc_st)</td>
+                <td>@Html.PasswordFor(a => a.d_pass_desc_st)</td>
+                <td>@Html.ValidationMessageFor(a => a.d_pass_desc_st)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "StartWorkout";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    @Styles.Render("~/Content/Layout.css")
+    @Styles.Render("~/Content/StartWorkout.css")
+</head>
+<body>
+    <div class="watch">
+
+        <div id="workoutMessage">
+            Start New Workout
+        </div>
+        <div class="time">
+            00:00:00
+        </div>
+
+        <div class="controls">
+            <button id="btn-start">Start Workout</button>
+            <button id="btn-stop">Stop Workout</button>
+            <button id="btn-cancel">Cancel Workout</button>
+        </div>
+
+        <div id="workout">
+            <form>
+                <input type="text" name="text" id="txt" required />
+                <button type="submit" class="btn-list">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </form>
+            <div id="containerW">
+                <ul>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="~/Scripts/StartWorkoutScript.js"></script>
+</body>
+

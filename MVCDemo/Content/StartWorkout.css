@@ -1,0 +1,50 @@
+﻿
+#btn-stop{
+    visibility:hidden;
+   
+}
+
+#workout {
+    visibility: hidden;
+}
+#btn-cancel {
+    visibility: hidden;
+}
+
+#containerW {
+    visibility: hidden;
+}
+
+#containerW ul {
+    list-style: none;
+}
+
+#containerW ul li {
+    width: 50%;
+    background: #a1a1a1;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    margin: 5px 0;
+}
+
+#containerW ul li span{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    text-align: center;
+    background: #b50909;
+}
+
+#inpt {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 70%;
+    width: 50px;
+    text-align: center;
+}

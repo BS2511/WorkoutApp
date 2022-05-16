@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c351e9233ea467aa18c3cc8fb58eaee" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_Model.d_exercises" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_Model.d_login_data" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="DB_Model.d_users" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DB_Model.d_workout" Width="1.5" PointX="3.75" PointY="7.25" />
+        <EntityTypeShape EntityType="DB_Model.f_user_data" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="DB_Model.f_user_workout" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="DB_Model.database_firewall_rules" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DB_Model.ipv6_database_firewall_rules" Width="1.5" PointX="5.75" PointY="7.75" />
+        <AssociationConnector Association="DB_Model.FK_f_user_workout_d_exercises" />
+        <AssociationConnector Association="DB_Model.FK_f_user_data_d_login_data" />
+        <AssociationConnector Association="DB_Model.FK_f_user_data_d_users" />
+        <AssociationConnector Association="DB_Model.FK_f_user_workout_d_users" />
+        <AssociationConnector Association="DB_Model.FK_f_user_workout_d_workout" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

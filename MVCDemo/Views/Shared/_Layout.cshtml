@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/Layout.css")
+</head>
+<body>
+    <div class="fullpage">
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+
+                    <i class='bx bx-dumbbell'></i>
+                    <div class="logo_name">WorkoutApp</div>
+
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
+            </div>
+            <ul class="nav_list">
+                <li>
+                    <i class='bx bx-line-chart'></i>
+                    @Html.ActionLink("Dashboard", "Dashboard", "Home", null, new { @class = "sidebarBtns" })
+                </li>
+                <li>
+                    <i class='bx bx-right-arrow'></i>
+                    @Html.ActionLink("Start Workout", "StartWorkout", "Home", null, new { @class = "sidebarBtns" })
+                </li>
+                <li>
+                    <i class='bx bx-book-bookmark'></i>
+                    @Html.ActionLink("History", "History", "Home", null, new { @class = "sidebarBtns" })
+                </li>
+                <li>
+                    <i class='bx bx-list-ul'></i>
+                    @Html.ActionLink("Exercises", "Exercises", "Home", null, new { @class = "sidebarBtns" })
+                </li>
+                <li>
+                    <i class='bx bx-envelope-open'></i>
+                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "sidebarBtns" })
+                </li>
+                <li>
+                    <i class='bx bx-log-out'></i>
+                    @Html.ActionLink("Log Out", "Login", "Login")
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <main role="main">
+                @RenderBody()
+            </main>
+            
+        </div>
+    </div>
+
+    
+</body>
+</html>

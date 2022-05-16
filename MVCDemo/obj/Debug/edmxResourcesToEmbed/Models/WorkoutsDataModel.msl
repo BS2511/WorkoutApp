@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WorkoutDataModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="d_exercises">
+      <EntityTypeMapping TypeName="WorkoutDataModel.d_exercises">
+        <MappingFragment StoreEntitySet="d_exercises">
+          <ScalarProperty Name="d_exercise_id" ColumnName="d_exercise_id" />
+          <ScalarProperty Name="d_exercise_name" ColumnName="d_exercise_name" />
+          <ScalarProperty Name="d_exercise_desc" ColumnName="d_exercise_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_login_data">
+      <EntityTypeMapping TypeName="WorkoutDataModel.d_login_data">
+        <MappingFragment StoreEntitySet="d_login_data">
+          <ScalarProperty Name="d_login_id" ColumnName="d_login_id" />
+          <ScalarProperty Name="d_login_desc_st" ColumnName="d_login_desc_st" />
+          <ScalarProperty Name="d_pass_desc_st" ColumnName="d_pass_desc_st" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_users">
+      <EntityTypeMapping TypeName="WorkoutDataModel.d_users">
+        <MappingFragment StoreEntitySet="d_users">
+          <ScalarProperty Name="d_user_id" ColumnName="d_user_id" />
+          <ScalarProperty Name="d_user_first_name_st" ColumnName="d_user_first_name_st" />
+          <ScalarProperty Name="d_user_last_name_st" ColumnName="d_user_last_name_st" />
+          <ScalarProperty Name="d_user_email_st" ColumnName="d_user_email_st" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="d_workout">
+      <EntityTypeMapping TypeName="WorkoutDataModel.d_workout">
+        <MappingFragment StoreEntitySet="d_workout">
+          <ScalarProperty Name="d_workout_id" ColumnName="d_workout_id" />
+          <ScalarProperty Name="d_workout_desc" ColumnName="d_workout_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="f_user_data">
+      <EntityTypeMapping TypeName="WorkoutDataModel.f_user_data">
+        <MappingFragment StoreEntitySet="f_user_data">
+          <ScalarProperty Name="d_user_id" ColumnName="d_user_id" />
+          <ScalarProperty Name="d_login_id" ColumnName="d_login_id" />
+          <ScalarProperty Name="f_last_login_dt" ColumnName="f_last_login_dt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="f_user_workout">
+      <EntityTypeMapping TypeName="WorkoutDataModel.f_user_workout">
+        <MappingFragment StoreEntitySet="f_user_workout">
+          <ScalarProperty Name="d_user_id" ColumnName="d_user_id" />
+          <ScalarProperty Name="d_workout_id" ColumnName="d_workout_id" />
+          <ScalarProperty Name="d_exercise_id" ColumnName="d_exercise_id" />
+          <ScalarProperty Name="ex_set" ColumnName="ex_set" />
+          <ScalarProperty Name="ex_reps" ColumnName="ex_reps" />
+          <ScalarProperty Name="ex_load" ColumnName="ex_load" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

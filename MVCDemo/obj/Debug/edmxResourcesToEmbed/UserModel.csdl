@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DB_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="d_exercises" EntityType="DB_Model.d_exercises" />
+    <EntitySet Name="d_login_data" EntityType="DB_Model.d_login_data" />
+    <EntitySet Name="d_users" EntityType="DB_Model.d_users" />
+    <EntitySet Name="d_workout" EntityType="DB_Model.d_workout" />
+    <EntitySet Name="f_user_data" EntityType="DB_Model.f_user_data" />
+    <EntitySet Name="f_user_workout" EntityType="DB_Model.f_user_workout" />
+    <EntitySet Name="database_firewall_rules" EntityType="DB_Model.database_firewall_rules" />
+    <EntitySet Name="ipv6_database_firewall_rules" EntityType="DB_Model.ipv6_database_firewall_rules" />
+    <AssociationSet Name="FK_f_user_workout_d_exercises" Association="DB_Model.FK_f_user_workout_d_exercises">
+      <End Role="d_exercises" EntitySet="d_exercises" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_data_d_login_data" Association="DB_Model.FK_f_user_data_d_login_data">
+      <End Role="d_login_data" EntitySet="d_login_data" />
+      <End Role="f_user_data" EntitySet="f_user_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_data_d_users" Association="DB_Model.FK_f_user_data_d_users">
+      <End Role="d_users" EntitySet="d_users" />
+      <End Role="f_user_data" EntitySet="f_user_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_workout_d_users" Association="DB_Model.FK_f_user_workout_d_users">
+      <End Role="d_users" EntitySet="d_users" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_workout_d_workout" Association="DB_Model.FK_f_user_workout_d_workout">
+      <End Role="d_workout" EntitySet="d_workout" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="d_exercises">
+    <Key>
+      <PropertyRef Name="d_exercise_id" />
+    </Key>
+    <Property Name="d_exercise_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_exercise_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="d_exercise_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="f_user_workout" Relationship="DB_Model.FK_f_user_workout_d_exercises" FromRole="d_exercises" ToRole="f_user_workout" />
+  </EntityType>
+  <EntityType Name="d_login_data">
+    <Key>
+      <PropertyRef Name="d_login_id" />
+    </Key>
+    <Property Name="d_login_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_login_desc_st" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="d_pass_desc_st" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="f_user_data" Relationship="DB_Model.FK_f_user_data_d_login_data" FromRole="d_login_data" ToRole="f_user_data" />
+  </EntityType>
+  <EntityType Name="d_users">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+    </Key>
+    <Property Name="d_user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_user_first_name_st" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="d_user_last_name_st" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="d_user_email_st" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="f_user_data" Relationship="DB_Model.FK_f_user_data_d_users" FromRole="d_users" ToRole="f_user_data" />
+    <NavigationProperty Name="f_user_workout" Relationship="DB_Model.FK_f_user_workout_d_users" FromRole="d_users" ToRole="f_user_workout" />
+  </EntityType>
+  <EntityType Name="d_workout">
+    <Key>
+      <PropertyRef Name="d_workout_id" />
+    </Key>
+    <Property Name="d_workout_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_workout_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="f_user_workout" Relationship="DB_Model.FK_f_user_workout_d_workout" FromRole="d_workout" ToRole="f_user_workout" />
+  </EntityType>
+  <EntityType Name="f_user_data">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+      <PropertyRef Name="d_login_id" />
+      <PropertyRef Name="f_last_login_dt" />
+    </Key>
+    <Property Name="d_user_id" Type="Int32" Nullable="false" />
+    <Property Name="d_login_id" Type="Int32" Nullable="false" />
+    <Property Name="f_last_login_dt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="d_login_data" Relationship="DB_Model.FK_f_user_data_d_login_data" FromRole="f_user_data" ToRole="d_login_data" />
+    <NavigationProperty Name="d_users" Relationship="DB_Model.FK_f_user_data_d_users" FromRole="f_user_data" ToRole="d_users" />
+  </EntityType>
+  <EntityType Name="f_user_workout">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+      <PropertyRef Name="d_workout_id" />
+      <PropertyRef Name="d_exercise_id" />
+      <PropertyRef Name="ex_set" />
+      <PropertyRef Name="ex_reps" />
+      <PropertyRef Name="ex_load" />
+    </Key>
+    <Property Name="d_user_id" Type="Int32" Nullable="false" />
+    <Property Name="d_workout_id" Type="Int32" Nullable="false" />
+    <Property Name="d_exercise_id" Type="Int32" Nullable="false" />
+    <Property Name="ex_set" Type="Int32" Nullable="false" />
+    <Property Name="ex_reps" Type="Int32" Nullable="false" />
+    <Property Name="ex_load" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="d_exercises" Relationship="DB_Model.FK_f_user_workout_d_exercises" FromRole="f_user_workout" ToRole="d_exercises" />
+    <NavigationProperty Name="d_users" Relationship="DB_Model.FK_f_user_workout_d_users" FromRole="f_user_workout" ToRole="d_users" />
+    <NavigationProperty Name="d_workout" Relationship="DB_Model.FK_f_user_workout_d_workout" FromRole="f_user_workout" ToRole="d_workout" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ipv6_database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ipv6_address" />
+      <PropertyRef Name="end_ipv6_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ipv6_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ipv6_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_f_user_workout_d_exercises">
+    <End Type="DB_Model.d_exercises" Role="d_exercises" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_Model.f_user_workout" Role="f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_exercises">
+        <PropertyRef Name="d_exercise_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_exercise_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_data_d_login_data">
+    <End Type="DB_Model.d_login_data" Role="d_login_data" Multiplicity="1" />
+    <End Type="DB_Model.f_user_data" Role="f_user_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_login_data">
+        <PropertyRef Name="d_login_id" />
+      </Principal>
+      <Dependent Role="f_user_data">
+        <PropertyRef Name="d_login_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_data_d_users">
+    <End Type="DB_Model.d_users" Role="d_users" Multiplicity="1" />
+    <End Type="DB_Model.f_user_data" Role="f_user_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_users">
+        <PropertyRef Name="d_user_id" />
+      </Principal>
+      <Dependent Role="f_user_data">
+        <PropertyRef Name="d_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_workout_d_users">
+    <End Type="DB_Model.d_users" Role="d_users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_Model.f_user_workout" Role="f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_users">
+        <PropertyRef Name="d_user_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_workout_d_workout">
+    <End Type="DB_Model.d_workout" Role="d_workout" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_Model.f_user_workout" Role="f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_workout">
+        <PropertyRef Name="d_workout_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_workout_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

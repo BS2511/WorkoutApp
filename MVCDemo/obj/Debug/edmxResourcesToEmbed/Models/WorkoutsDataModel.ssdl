@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WorkoutDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="d_exercises">
+    <Key>
+      <PropertyRef Name="d_exercise_id" />
+    </Key>
+    <Property Name="d_exercise_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_exercise_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="d_exercise_desc" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="d_login_data">
+    <Key>
+      <PropertyRef Name="d_login_id" />
+    </Key>
+    <Property Name="d_login_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_login_desc_st" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="d_pass_desc_st" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="d_users">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+    </Key>
+    <Property Name="d_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_user_first_name_st" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="d_user_last_name_st" Type="varchar" MaxLength="50" />
+    <Property Name="d_user_email_st" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="d_workout">
+    <Key>
+      <PropertyRef Name="d_workout_id" />
+    </Key>
+    <Property Name="d_workout_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_workout_desc" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'bs-main.dbo.f_user_data' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="f_user_data">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+      <PropertyRef Name="d_login_id" />
+      <PropertyRef Name="f_last_login_dt" />
+    </Key>
+    <Property Name="d_user_id" Type="int" Nullable="false" />
+    <Property Name="d_login_id" Type="int" Nullable="false" />
+    <Property Name="f_last_login_dt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'bs-main.dbo.f_user_workout' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="f_user_workout">
+    <Key>
+      <PropertyRef Name="d_user_id" />
+      <PropertyRef Name="d_workout_id" />
+      <PropertyRef Name="d_exercise_id" />
+      <PropertyRef Name="ex_set" />
+      <PropertyRef Name="ex_reps" />
+      <PropertyRef Name="ex_load" />
+    </Key>
+    <Property Name="d_user_id" Type="int" Nullable="false" />
+    <Property Name="d_workout_id" Type="int" Nullable="false" />
+    <Property Name="d_exercise_id" Type="int" Nullable="false" />
+    <Property Name="ex_set" Type="int" Nullable="false" />
+    <Property Name="ex_reps" Type="int" Nullable="false" />
+    <Property Name="ex_load" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_f_user_data_d_login_data">
+    <End Role="d_login_data" Type="Self.d_login_data" Multiplicity="1" />
+    <End Role="f_user_data" Type="Self.f_user_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_login_data">
+        <PropertyRef Name="d_login_id" />
+      </Principal>
+      <Dependent Role="f_user_data">
+        <PropertyRef Name="d_login_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_data_d_users">
+    <End Role="d_users" Type="Self.d_users" Multiplicity="1" />
+    <End Role="f_user_data" Type="Self.f_user_data" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_users">
+        <PropertyRef Name="d_user_id" />
+      </Principal>
+      <Dependent Role="f_user_data">
+        <PropertyRef Name="d_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_workout_d_exercises">
+    <End Role="d_exercises" Type="Self.d_exercises" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="f_user_workout" Type="Self.f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_exercises">
+        <PropertyRef Name="d_exercise_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_exercise_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_workout_d_users">
+    <End Role="d_users" Type="Self.d_users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="f_user_workout" Type="Self.f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_users">
+        <PropertyRef Name="d_user_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_f_user_workout_d_workout">
+    <End Role="d_workout" Type="Self.d_workout" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="f_user_workout" Type="Self.f_user_workout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="d_workout">
+        <PropertyRef Name="d_workout_id" />
+      </Principal>
+      <Dependent Role="f_user_workout">
+        <PropertyRef Name="d_workout_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WorkoutDataModelStoreContainer">
+    <EntitySet Name="d_exercises" EntityType="Self.d_exercises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_login_data" EntityType="Self.d_login_data" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_users" EntityType="Self.d_users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="d_workout" EntityType="Self.d_workout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="f_user_data" EntityType="Self.f_user_data" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [f_user_data].[d_user_id] AS [d_user_id], 
+    [f_user_data].[d_login_id] AS [d_login_id], 
+    [f_user_data].[f_last_login_dt] AS [f_last_login_dt]
+    FROM [dbo].[f_user_data] AS [f_user_data]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="f_user_workout" EntityType="Self.f_user_workout" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [f_user_workout].[d_user_id] AS [d_user_id], 
+    [f_user_workout].[d_workout_id] AS [d_workout_id], 
+    [f_user_workout].[d_exercise_id] AS [d_exercise_id], 
+    [f_user_workout].[ex_set] AS [ex_set], 
+    [f_user_workout].[ex_reps] AS [ex_reps], 
+    [f_user_workout].[ex_load] AS [ex_load]
+    FROM [dbo].[f_user_workout] AS [f_user_workout]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_f_user_data_d_login_data" Association="Self.FK_f_user_data_d_login_data">
+      <End Role="d_login_data" EntitySet="d_login_data" />
+      <End Role="f_user_data" EntitySet="f_user_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_data_d_users" Association="Self.FK_f_user_data_d_users">
+      <End Role="d_users" EntitySet="d_users" />
+      <End Role="f_user_data" EntitySet="f_user_data" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_workout_d_exercises" Association="Self.FK_f_user_workout_d_exercises">
+      <End Role="d_exercises" EntitySet="d_exercises" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_workout_d_users" Association="Self.FK_f_user_workout_d_users">
+      <End Role="d_users" EntitySet="d_users" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+    <AssociationSet Name="FK_f_user_workout_d_workout" Association="Self.FK_f_user_workout_d_workout">
+      <End Role="d_workout" EntitySet="d_workout" />
+      <End Role="f_user_workout" EntitySet="f_user_workout" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
